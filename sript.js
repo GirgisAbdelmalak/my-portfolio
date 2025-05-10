@@ -19,3 +19,14 @@ document.getElementById('downloadResumeBtn').addEventListener('click', function(
     link.click();
     document.body.removeChild(link);
 });
+
+var userName = 'irgis Kelliny'
+var nameElement = document.querySelector("h1")
+var counter = 0
+setInterval(()=>{
+    if(counter<userName.length){
+        nameElement.innerHTML += userName[counter]
+        counter++
+    }
+},200)
+
