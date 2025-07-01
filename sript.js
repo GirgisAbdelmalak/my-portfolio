@@ -1,32 +1,45 @@
-const data = document.getElementById("data");
-document.getElementById("menuBtn").addEventListener("click", function () {
-    if(data.classList.contains("move-down")){
-        data.classList.remove("move-down")
-        data.classList.add("move-up")
+// ===== Animate Typing Effect =====
+document.addEventListener("DOMContentLoaded", () => {
+  const nameElement = document.querySelector(".typed-name");
+  const fullName = "Girgis Kelliny";
+  let index = 0;
+  nameElement.textContent = "";
+
+  const typingInterval = setInterval(() => {
+    if (index < fullName.length) {
+      nameElement.textContent += fullName.charAt(index);
+      index++;
+    } else {
+      clearInterval(typingInterval);
     }
-    else{
-        data.classList.remove("move-up")
-        data.classList.add("move-down")
-    }
+  }, 150);
 });
 
-document.getElementById('downloadResumeBtn').addEventListener('click', function() {
-    // Create a temporary link
-    const link = document.createElement('a');
-    link.href = 'Assets/Gerges_CV.pdf';
-    link.download = 'Gerges CV.pdf'; // Optional: set filename
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+// ===== AOS Initialization =====
+AOS.init({
+  duration: 1000,
+  once: true, // animation happens only once
 });
 
-var userName = 'irgis Kelliny'
-var nameElement = document.querySelector("h1")
-var counter = 0
-setInterval(()=>{
-    if(counter<userName.length){
-        nameElement.innerHTML += userName[counter]
-        counter++
-    }
-},200)
+// ===== Download Resume Logic =====
+const downloadBtn = document.getElementById("downloadResumeBtn");
+if (downloadBtn) {
+  downloadBtn.addEventListener("click", () => {
+    const a = document.createElement("a");
+    a.href = "Assets/Gerges_CV.pdf";
+    a.download = "Gerges CV.pdf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+}
 
+// ===== Optional Contact Form Alert =====
+const contactForm = document.querySelector("form");
+if (contactForm) {
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("Thank you! Your message has been sent.");
+    contactForm.reset();
+  });
+}
